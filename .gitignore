@@ -3,6 +3,7 @@
 [Oo]bj/
 [Bb]uild/
 [Bb]uilds/
+[Ll]ogs/
 Assets/AssetStoreTools*
 TestProject/Assets/Editor/resources/*
 
@@ -19,6 +20,7 @@ ExportedObj/
 *.pidb
 *.booproj
 *.svd
+*.log
 
 
 # Unity3D generated meta files
