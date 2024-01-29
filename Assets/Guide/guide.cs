@@ -31,7 +31,7 @@ public class GuideScript : MonoBehaviour
         for (int layer = 1; layer < (layerCount + 1); layer++)
         {
 
-            GameObject layerObject = Instantiate(new GameObject($"Layer{layer}"), Vector3.zero, Quaternion.identity, this.transform);
+            GameObject layerObject = Instantiate(new GameObject($"Layer{layer}"), this.transform);
 
             GuideLayers.Add(layerObject);
 
@@ -58,7 +58,10 @@ public class GuideScript : MonoBehaviour
                 Vector3 petalPosition = new(x, y, -(layer * 0.15f));
                 Quaternion petalRotation = Quaternion.Euler(90 - angleDegree, 90, 0);
 
-                GameObject PetalObject = Instantiate(petal, petalPosition, petalRotation, layerObject.transform);
+                GameObject PetalObject = Instantiate(petal, layerObject.transform);
+                PetalObject.transform.localPosition = petalPosition;
+                PetalObject.transform.localRotation = petalRotation;
+                // petalPosition, petalRotation,
 
                 PetalObject.transform.localScale *= Mathf.Max(layer * 0.3f, MIN_SCALE);
 
