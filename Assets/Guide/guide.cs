@@ -1,4 +1,5 @@
 
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -127,7 +128,7 @@ public class GuideScript : MonoBehaviour
         int i = 0;
         foreach (GameObject petal in GuidePetals[layer])
         {
-            petal.transform.localPosition = Vector3.Lerp(InitialPetalPositions[layer][i], InitialPetalPositions[layer][i] * layer * spreadFactor, t);
+            petal.transform.localPosition = Vector3.Lerp(InitialPetalPositions[layer][i], layer * spreadFactor * InitialPetalPositions[layer][i], t);
 
 
             i++;
@@ -136,9 +137,11 @@ public class GuideScript : MonoBehaviour
 
 
         int rotationDirection = isEven ? 1 : -1;
-        GuideLayers[layer - 1].transform.Rotate(0, 0, rotationAngle * rotationDirection);
+        GuideLayers[layer - 1].transform.Rotate(0, 0, t * rotationAngle * rotationDirection);
         // decrease z position
         GuideLayers[layer - 1].transform.Translate(0, 0, -t * layer * 0.001f);
+
+
 
 
 
@@ -152,14 +155,14 @@ public class GuideScript : MonoBehaviour
         int i = 0;
         foreach (GameObject petal in GuidePetals[layer])
         {
-            petal.transform.localPosition = Vector3.Lerp(InitialPetalPositions[layer][i] * layer * spreadFactor, InitialPetalPositions[layer][i], t);
+            petal.transform.localPosition = Vector3.Lerp(layer * spreadFactor * InitialPetalPositions[layer][i], InitialPetalPositions[layer][i], t);
             i++;
         }
         float rotationAngle = 360f / inspirationTimeMs * t;
 
 
         int rotationDirection = isEven ? -1 : 1;
-        GuideLayers[layer - 1].transform.Rotate(0, 0, rotationAngle * rotationDirection);
+        GuideLayers[layer - 1].transform.Rotate(0, 0, t * rotationAngle * rotationDirection);
         // increase z position
         GuideLayers[layer - 1].transform.Translate(0, 0, t * layer * 0.001f);
 
