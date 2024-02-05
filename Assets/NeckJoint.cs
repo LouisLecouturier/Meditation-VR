@@ -32,7 +32,6 @@ public class NeckJoint : MonoBehaviour
     {
         float angle = transform.eulerAngles.z;
         if (angle > 180) angle -= 360; 
-        angle = Mathf.Abs(angle);
        return angle;
     }
 
@@ -56,7 +55,7 @@ public class NeckJoint : MonoBehaviour
 
     private IEnumerator TurnRight()
     {
-        
+        Debug.Log(GetAngle());
         if (GetAngle() < -45)
         {
             yield return new WaitForSeconds(2);
