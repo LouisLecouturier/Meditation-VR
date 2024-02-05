@@ -141,11 +141,19 @@ public class GuideScript : MonoBehaviour
         // decrease z position
         GuideLayers[layer - 1].transform.Translate(0, 0, -t * layer * 0.001f);
 
+    }
 
+    void HoldLayer(int layer, float t)
+    {
+        bool isEven = layer % 2 == 0;
 
-
-
-
+        int i = 0;
+        foreach (GameObject petal in GuidePetals[layer])
+        {
+            petal.transform.localPosition = Vector3.Lerp(layer * spreadFactor * InitialPetalPositions[layer][i], InitialPetalPositions[layer][i], t);
+            i++;
+        }
+        float rotationAngle = 360f / inspirationTimeMs * t;
     }
 
     void GatherLayer(int layer, float t)
@@ -164,7 +172,7 @@ public class GuideScript : MonoBehaviour
         int rotationDirection = isEven ? -1 : 1;
         GuideLayers[layer - 1].transform.Rotate(0, 0, t * rotationAngle * rotationDirection);
         // increase z position
-        GuideLayers[layer - 1].transform.Translate(0, 0, t * layer * 0.001f);
+        GuideLayers[layer - 1].transform.Translate(0, 0, t * layer * 0.1f);
 
     }
 
@@ -179,6 +187,10 @@ public class GuideScript : MonoBehaviour
             {
                 SpreadLayer(layer, t);
 
+            }
+            else if (currentStep == 1)
+            {
+                HoldLayer(layer, t);
             }
             else if (currentStep == 2)
             {
