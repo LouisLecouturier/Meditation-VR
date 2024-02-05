@@ -6,53 +6,44 @@ public class TargetManagement : MonoBehaviour
 {
     [SerializeField] private Animator animator;
     [SerializeField] private Camera cam;
-
-    private bool isAnimating = false;
-
     private float animationCooldown = 10.0f;
     private float nextAnimationTime = 0.0f;
-
-    	[SerializeField] private float fadePerSecond = 2.5f;
-
-
-    public Renderer rend;
+    
+    private bool isAnimating = false;
 
 
+    // private bool IsVisible(Camera c)
+    // {
+    //     var planes = GeometryUtility.CalculateFrustumPlanes(c);
+    //     var point = transform.position;
 
-    // IEnumerator FadeOut3D (float targetAlpha, bool isVanish, float duration)
+    //     foreach (var plane in planes)
     //     {
-    //         // Renderer sr = GetComponent<Renderer> ();
-    //         float diffAlpha = targetAlpha - sr.material.color.a;
-
-    //         float counter = 0;
-    //         while (counter < duration) {
-    //             float alphaAmount = sr.material.color.a + (Time.deltaTime * diffAlpha) / duration;
-    //             sr.material.color = new Color (sr.material.color.r, sr.material.color.g, sr.material.color.b, alphaAmount);
-
-    //             counter += Time.deltaTime;
-    //             yield return null;
-    //         }
-    //         sr.material.color = new Color (sr.material.color.r, sr.material.color.g, sr.material.color.b, targetAlpha);
-    //         if (isVanish) {
-    //             sr.transform.gameObject.SetActive (false);
+    //         if (plane.GetDistanceToPoint(point) < 0)
+    //         {
+    //             return false;
     //         }
     //     }
-
-
+    //     return true;
+    // }
     private bool IsVisible(Camera c)
-    {
-        var planes = GeometryUtility.CalculateFrustumPlanes(c);
-        var point = transform.position;
+{
+    Vector3 viewportPoint = c.WorldToViewportPoint(transform.position);
 
-        foreach (var plane in planes)
-        {
-            if (plane.GetDistanceToPoint(point) < 0)
-            {
-                return false;
-            }
-        }
-        return true;
+    // Vérifie si le point est dans le frustum de la caméra
+    if (viewportPoint.z < 0 || viewportPoint.x < 0 || viewportPoint.x > 1 || viewportPoint.y < 0 || viewportPoint.y > 1)
+    {
+        return false;
     }
+
+    // Vérifie si le point est dans la moitié centrale de l'écran
+    if (viewportPoint.x < 0.25f || viewportPoint.x > 0.75f || viewportPoint.y < 0.25f || viewportPoint.y > 0.75f)
+    {
+        return false;
+    }
+
+    return true;
+}
 
     IEnumerator FadeOut()
 {
@@ -65,52 +56,62 @@ public class TargetManagement : MonoBehaviour
         foreach (Renderer renderer in renderers)
         {
         Color originalColor = renderer.material.color;
-        // Color newColor = new Color(originalColor.r, originalColor.g, originalColor.b, Mathf.Lerp(1, 0, t));
-        Color newColor = new Color(originalColor.r, originalColor.g, originalColor.b, 0.25f);
+        Color newColor = new Color(originalColor.r, originalColor.g, originalColor.b, Mathf.Lerp(1, 0, t));
+        Debug.Log(newColor.a);
 
         renderer.material.color = newColor;
-        yield return null;
         }
+        yield return null;
     }
 }
+
+
+
+    IEnumerator ResetOpacity()
+    {
+        Renderer[] renderers = GetComponentsInChildren<Renderer>();
+
+        foreach (Renderer renderer in renderers)
+        {
+            Color originalColor = renderer.material.color;
+            Color newColor = new Color(originalColor.r, originalColor.g, originalColor.b, 1);
+
+            renderer.material.color = newColor;
+            yield return null;
+        }
+    }
 
 
     void Start(){
-    //    Renderer[] renderers = GetComponentsInChildren<Renderer>();
-    //     foreach (Renderer renderer in renderers)
-    //     {
-    //         Color originalColor = renderer.material.color;
-    //         Color newColor = new Color(originalColor.r, originalColor.g, originalColor.b, 0.5f);
-    //         renderer.material.color = newColor;
-    //     }
+        StartCoroutine(ResetOpacity());
     }
+
+    IEnumerator TriggerAnim() {
+        yield return new WaitForSeconds(1f);
+        animator.SetTrigger("trigger");
+        nextAnimationTime = Time.time + animationCooldown;
+        StartCoroutine(FadeOut());
+    }
+
+
     void Update()
     {
-        if (IsVisible(cam) && Time.time >= nextAnimationTime)
+        if (IsVisible(cam) && Time.time >= nextAnimationTime && !isAnimating)
         {
-            if (!isAnimating)
-            {
-                // Debug.Log("Visible");
-                isAnimating = true;
-                // StartCoroutine(FadeOut3D(0, false, 2));
-                animator.SetTrigger("trigger");
-                nextAnimationTime = Time.time + animationCooldown;
-                StartCoroutine(FadeOut());
+            Debug.Log("Launching animation");
+            isAnimating = true;
+            StartCoroutine(TriggerAnim());
 
-
-
-            }
         }
-        else
+
+        if(!IsVisible(cam) && Time.time >= nextAnimationTime && isAnimating)
         {
+            Debug.Log("Resetting animation");
+            StartCoroutine(ResetOpacity());
             isAnimating = false;
         }
-
-        AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
-        if (stateInfo.normalizedTime >= 1 && isAnimating)
-        {
-            Debug.Log("Animation finished");
-            isAnimating = false;
-        }
+       
     }
 }
+
+
