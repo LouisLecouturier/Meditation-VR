@@ -1,12 +1,13 @@
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class Compteur : MonoBehaviour
 {
-    public float tempsInitial = 60.0f; // Temps initial du compteur en secondes
-    private float tempsRestant; // Temps restant du compteur
+    public float tempsInitial = 60.0f;
+    private float tempsRestant;
 
-    public Text textCompteur; // Correction : la variable doit être nommée textCompteur
+    public TextMeshProUGUI textCompteur; // Utilisez TextMeshProUGUI pour les textes TextMeshPro
 
     private void Start()
     {
@@ -18,13 +19,14 @@ public class Compteur : MonoBehaviour
         tempsRestant -= Time.deltaTime;
 
         // Mettez à jour le texte du compteur
-        textCompteur.text = "Temps : " + Mathf.Round(tempsRestant).ToString();
+        textCompteur.text = "Temps : " + Mathf.Round(tempsRestant).ToString() + "s";
 
         // Vérifiez si le temps est écoulé
         if (tempsRestant <= 0)
         {
             // Mettez ici le code à exécuter lorsque le temps est écoulé
-            Debug.Log("Temps écoulé !");
+            Debug.Log("Fin de la session !");
+            textCompteur.text = "Fin de la session !";
             // Vous pouvez désactiver le script ou déclencher une autre action
             enabled = false;
         }
