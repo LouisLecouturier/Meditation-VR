@@ -29,6 +29,24 @@ public class GuideScript : MonoBehaviour
     private Dictionary<int, List<GameObject>> GuidePetals = new();
     private Dictionary<int, Vector3[]> InitialPetalPositions = new Dictionary<int, Vector3[]>();
 
+
+
+
+    public void SetInspirationTimeMs(float timeMs)
+    {
+        inspirationTimeMs = timeMs;
+    }
+
+    public void SetExpirationTimeMs(float timeMs)
+    {
+        expirationTimeMs = timeMs;
+    }
+
+    public void SetHoldTimeMs(float timeMs)
+    {
+        holdTimeMs = timeMs;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -79,7 +97,6 @@ public class GuideScript : MonoBehaviour
             InitialPetalPositions.Add(layer, initialPositions);
 
         }
-
 
 
     }
