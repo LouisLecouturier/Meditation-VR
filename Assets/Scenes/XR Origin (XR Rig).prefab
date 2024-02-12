@@ -3639,7 +3639,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec407d039cee49d4f9bbb5c530a590d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tempsInitial: 5
+  tempsInitial: 60
   textCompteur: {fileID: 1797645018105561869}
 --- !u!1 &4949121596560509093
 GameObject:
