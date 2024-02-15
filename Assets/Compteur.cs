@@ -7,7 +7,7 @@ public class Compteur : MonoBehaviour
     public float tempsInitial = 60.0f;
     private float tempsRestant;
 
-    public TextMeshProUGUI textCompteur; // Utilisez TextMeshProUGUI pour les textes TextMeshPro
+    public TextMeshProUGUI textCompteur; 
 
     private void Start()
     {
