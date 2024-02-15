@@ -14,7 +14,6 @@ public class GuideScript : MonoBehaviour
 
 
 
-
     [SerializeField] private float inspirationTimeMs = 4000;
     [SerializeField] private float expirationTimeMs = 4000;
     [SerializeField] private float holdTimeMs = 2000;
@@ -29,6 +28,39 @@ public class GuideScript : MonoBehaviour
     private Dictionary<int, List<GameObject>> GuidePetals = new();
     private Dictionary<int, Vector3[]> InitialPetalPositions = new Dictionary<int, Vector3[]>();
     private Dictionary<int, Vector3[]> InitialPetalScales = new Dictionary<int, Vector3[]>();
+
+
+
+    public double GetInspirationTimeS() {
+        float inspirationTimeS = inspirationTimeMs / 1000f;
+        return Math.Round(inspirationTimeS, 1);
+    }
+
+    public void SetInspirationTimeMs(float timeMs)
+    {
+        inspirationTimeMs = timeMs;
+    }
+    public double GetExpirationTimeS() {
+
+        float expTimeS = expirationTimeMs / 1000f;
+        return Math.Round(expTimeS, 1);
+    }
+
+    public void SetExpirationTimeMs(float timeMs)
+    {
+    
+        expirationTimeMs = timeMs;
+    }
+
+    public double GetHoldTimeS() {
+        float holdTimeS = holdTimeMs / 1000f;
+        return Math.Round(holdTimeS, 1);
+    }
+    public void SetHoldTimeMs(float timeMs)
+    {
+        holdTimeMs = timeMs;
+    }
+
 
     // Start is called before the first frame update
     void Start()
@@ -85,7 +117,6 @@ public class GuideScript : MonoBehaviour
             InitialPetalScales.Add(layer, initialScales);
 
         }
-
 
 
     }
