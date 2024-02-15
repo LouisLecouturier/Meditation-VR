@@ -27,6 +27,7 @@ public class GuideScript : MonoBehaviour
     private List<GameObject> GuideLayers = new();
     private Dictionary<int, List<GameObject>> GuidePetals = new();
     private Dictionary<int, Vector3[]> InitialPetalPositions = new Dictionary<int, Vector3[]>();
+    private Dictionary<int, Vector3[]> InitialPetalScales = new Dictionary<int, Vector3[]>();
 
 
 
@@ -80,6 +81,7 @@ public class GuideScript : MonoBehaviour
 
             List<GameObject> layerPetals = new();
             Vector3[] initialPositions = new Vector3[layerPetalCount];
+            Vector3[] initialScales = new Vector3[layerPetalCount];
 
             for (int j = 0; j < layerPetalCount; j++)
             {
@@ -102,166 +104,206 @@ public class GuideScript : MonoBehaviour
                 PetalObject.transform.localRotation = petalRotation;
 
 
-                PetalObject.transform.localScale *= (layer / (float)layerCount) * (MAX_SCALE - MIN_SCALE) + MIN_SCALE;
+                float scale = layer / (float)layerCount * (MAX_SCALE - MIN_SCALE) + MIN_SCALE;
+                initialScales[j] = PetalObject.transform.localScale;
+                PetalObject.transform.localScale *= scale;
+
 
                 layerPetals.Add(PetalObject);
             }
 
             GuidePetals.Add(layer, layerPetals);
             InitialPetalPositions.Add(layer, initialPositions);
+            InitialPetalScales.Add(layer, initialScales);
 
         }
 
 
     }
+
+
+
+
+
+    float EasedProgression(float timeProgression)
+    {
+        float SinX = Math.Abs(Mathf.Sin(Mathf.PI * timeProgression * 0.5f));
+        return SinX;
+    }
+
+
+
+
+    float TimeProgression(float timer, float periodDurationMs)
+    {
+        return timer / periodDurationMs;
+    }
+
 
     private float timer = 0f;
     private int currentStep = 0; // 0: Inspiration, 1: Hold, 2: Expiration
-
+    float stepProgression = 0;
     void Update()
     {
-        timer += Time.deltaTime;
+
+        timer += Time.deltaTime * 1000;
+
 
         switch (currentStep)
         {
-            case 0: // Inspiration
-                UpdatePetalAnimation(inspirationTimeMs);
-                if (timer >= inspirationTimeMs / 1000f)
-                {
-                    timer = 0f; // Réinitialiser le timer au début de chaque étape
-                    currentStep = 1; // Passer à la rétention
-                }
+            case 0:
+                stepProgression = TimeProgression(timer, inspirationTimeMs);
+
                 break;
-            case 1: // Hold
-                if (timer >= holdTimeMs / 1000f)
-                {
-                    timer = 0f; // Réinitialiser le timer au début de chaque étape
-                    currentStep = 2; // Passer à l'expiration
-                }
+
+            case 1:
+                stepProgression = TimeProgression(timer, holdTimeMs);
                 break;
-            case 2: // Expiration
-                UpdatePetalAnimation(expirationTimeMs);
-                if (timer >= expirationTimeMs / 1000f)
-                {
-                    timer = 0f; // Réinitialiser le timer au début de chaque étape
-                    currentStep = 0; // Revenir à l'inspiration
-                }
+
+            case 2:
+                stepProgression = TimeProgression(timer, expirationTimeMs);
                 break;
+
         }
-    }
+
+        Debug.Log($"Step: {currentStep}, Progression: {stepProgression}");
 
 
+        HandleStepAnimations(currentStep, stepProgression);
 
-    void SpreadLayer(int layer, float t)
-    {
-        bool isEven = layer % 2 == 0;
 
-        int i = 0;
-        foreach (GameObject petal in GuidePetals[layer])
+        if (stepProgression >= 1)
         {
-            petal.transform.localPosition = Vector3.Lerp(InitialPetalPositions[layer][i], layer * spreadFactor * InitialPetalPositions[layer][i], t);
-
-
-            i++;
+            timer = 0;
+            currentStep++;
+            if (currentStep > 2) currentStep = 0;
         }
-        float rotationAngle = 360f / inspirationTimeMs * t;
-
-
-        int rotationDirection = isEven ? 1 : -1;
-        GuideLayers[layer - 1].transform.Rotate(0, 0, t * rotationAngle * rotationDirection);
-        // decrease z position
-        GuideLayers[layer - 1].transform.Translate(0, 0, -t * layer * 0.001f);
-
-
-
-
-
 
     }
 
-    void GatherLayer(int layer, float t)
+
+    void RotateLayer(int layer, float angle, bool revert, float progression)
     {
-        bool isEven = layer % 2 == 0;
-
-        int i = 0;
-        foreach (GameObject petal in GuidePetals[layer])
-        {
-            petal.transform.localPosition = Vector3.Lerp(layer * spreadFactor * InitialPetalPositions[layer][i], InitialPetalPositions[layer][i], t);
-            i++;
-        }
-        float rotationAngle = 360f / inspirationTimeMs * t;
-
-
-        int rotationDirection = isEven ? -1 : 1;
-        GuideLayers[layer - 1].transform.Rotate(0, 0, t * rotationAngle * rotationDirection);
-        // increase z position
-        GuideLayers[layer - 1].transform.Translate(0, 0, t * layer * 0.001f);
-
+        if (revert) angle = -angle;
+        GuideLayers[layer - 1].transform.localRotation = Quaternion.Euler(0, 0, angle * progression);
     }
 
-    void UpdatePetalAnimation(float durationMs)
+
+
+    void AnimateInspiration(float progression)
     {
-        float t = timer / (durationMs / 1000f);
-        t = EaseInOut(t);
 
         for (int layer = 1; layer < (layerCount + 1); layer++)
         {
-            if (currentStep == 0)
-            {
-                SpreadLayer(layer, t);
+            int layerPetalCount = layer * initialPetalCount;
+            Vector3[] initialPositions = InitialPetalPositions[layer];
+            List<GameObject> layerPetals = GuidePetals[layer];
 
-            }
-            else if (currentStep == 2)
+            bool isEven = layer % 2 == 0;
+
+            RotateLayer(layer, 360, isEven, progression);
+
+            GuideLayers[layer - 1].transform.position = Vector3.Lerp(Vector3.zero, new Vector3(0, 0, -layer * layerGap), progression);
+
+            for (int j = 0; j < layerPetalCount; j++)
             {
-                GatherLayer(layer, t);
+                Vector3 initialPosition = initialPositions[j];
+                GameObject petal = layerPetals[j];
+
+                petal.transform.localPosition = Vector3.Lerp(initialPosition, layer * spreadFactor * initialPosition, progression);
             }
         }
     }
 
 
-
-    float EaseInOut(float t, float power = 2)
+    void AnimateHold(float progression)
     {
-        if (t < 0.5f)
+
+        for (int layer = 1; layer < (layerCount + 1); layer++)
         {
-            return 0.5f * Mathf.Pow(2 * t, power);
+            //
         }
-        else
-        {
-            return 1 - 0.5f * Mathf.Pow(2 * (1 - t), power);
-        }
+
     }
 
 
+    void AnimateExpiration(float progression)
+    {
+
+        for (int layer = 1; layer < (layerCount + 1); layer++)
+        {
+            int layerPetalCount = layer * initialPetalCount;
+            Vector3[] initialPositions = InitialPetalPositions[layer];
+            List<GameObject> layerPetals = GuidePetals[layer];
+
+            bool isEven = layer % 2 == 0;
 
 
-    // Update is called once per frame
-    // void Update()
-    // {
-    //     float sinX = Mathf.Sin(Time.time * freq);
+            RotateLayer(layer, 360, isEven, progression);
 
-    //     int i = 1;
+            GuideLayers[layer - 1].transform.position = Vector3.Lerp(new Vector3(0, 0, -layer * layerGap), Vector3.zero, progression);
 
+            for (int j = 0; j < layerPetalCount; j++)
+            {
+                Vector3 initialPosition = initialPositions[j];
+                GameObject petal = layerPetals[j];
 
-    //     foreach (int layer in GuidePetals.Keys)
-    //     {
+                petal.transform.localPosition = Vector3.Lerp(layer * spreadFactor * initialPosition, initialPosition, progression);
+            }
+        }
 
-    //         int coeff = 1;
-
-    //         GuideLayers[layer - 1].transform.Rotate(0, 0, sinX * coeff * 0.0005f * 360);
-
-    //         foreach (GameObject petal in GuidePetals[layer])
-    //         {
-
-    //             petal.transform.Translate(0, sinX * 0.00005f * i, sinX * 0.00005f * i, Space.Self);
-    //             petal.transform.Rotate(sinX * 0.001f, sinX * 0.05f * layer, 0, Space.Self);
-    //             i++;
-    //         }
+    }
 
 
-    //     }
-
-
-
-    // }
+    void HandleStepAnimations(int step, float progression)
+    {
+        switch (step)
+        {
+            case 0:
+                float inspirationProgression = EasedProgression(progression);
+                Debug.Log($"Inspiration Progression: {inspirationProgression}");
+                AnimateInspiration(inspirationProgression);
+                break;
+            case 1:
+                AnimateHold(progression);
+                break;
+            case 2:
+                float expirationProgression = EasedProgression(progression);
+                AnimateExpiration(expirationProgression);
+                break;
+        }
+    }
 }
+
+
+
+// Update is called once per frame
+// void Update()
+// {
+//     float sinX = Mathf.Sin(Time.time * freq);
+
+//     int i = 1;
+
+
+//     foreach (int layer in GuidePetals.Keys)
+//     {
+
+//         int coeff = 1;
+
+//         GuideLayers[layer - 1].transform.Rotate(0, 0, sinX * coeff * 0.0005f * 360);
+
+//         foreach (GameObject petal in GuidePetals[layer])
+//         {
+
+//             petal.transform.Translate(0, sinX * 0.00005f * i, sinX * 0.00005f * i, Space.Self);
+//             petal.transform.Rotate(sinX * 0.001f, sinX * 0.05f * layer, 0, Space.Self);
+//             i++;
+//         }
+
+
+//     }
+
+
+
+// }
+

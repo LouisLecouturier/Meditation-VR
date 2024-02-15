@@ -323,7 +323,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -6615172043430022230, guid: 1077dffa08390476e929cf9400ea7707, type: 3}
       propertyPath: layerGap
-      value: 0.2
+      value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: -6615172043430022230, guid: 1077dffa08390476e929cf9400ea7707, type: 3}
       propertyPath: holdTimeMs
@@ -331,7 +331,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -6615172043430022230, guid: 1077dffa08390476e929cf9400ea7707, type: 3}
       propertyPath: spreadFactor
-      value: 8
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: -6615172043430022230, guid: 1077dffa08390476e929cf9400ea7707, type: 3}
       propertyPath: expirationTime
