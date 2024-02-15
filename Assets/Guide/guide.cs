@@ -166,7 +166,6 @@ public class GuideScript : MonoBehaviour
 
         }
 
-        Debug.Log($"Step: {currentStep}, Progression: {stepProgression}");
 
 
         HandleStepAnimations(currentStep, stepProgression);
