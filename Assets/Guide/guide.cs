@@ -14,7 +14,6 @@ public class GuideScript : MonoBehaviour
 
 
 
-
     [SerializeField] private float inspirationTimeMs = 4000;
     [SerializeField] private float expirationTimeMs = 4000;
     [SerializeField] private float holdTimeMs = 2000;
@@ -31,30 +30,36 @@ public class GuideScript : MonoBehaviour
 
 
 
-    public float GetInspirationTimeS() {
-        return Math.Round(inspirationTimeMs / 1000, 1)
+    public double GetInspirationTimeS() {
+        float inspirationTimeS = inspirationTimeMs / 1000f;
+        return Math.Round(inspirationTimeS, 1);
     }
 
     public void SetInspirationTimeMs(float timeMs)
     {
         inspirationTimeMs = timeMs;
     }
-    public float GetExpirationTimeS() {
-        return Math.Round(expirationTimeMs / 1000, 1)
+    public double GetExpirationTimeS() {
+
+        float expTimeS = expirationTimeMs / 1000f;
+        return Math.Round(expTimeS, 1);
     }
 
     public void SetExpirationTimeMs(float timeMs)
     {
+    
         expirationTimeMs = timeMs;
     }
 
-    public float GetHoldTimeS() {
-        return Math.Round(holdTimeMs / 1000, 1)
+    public double GetHoldTimeS() {
+        float holdTimeS = holdTimeMs / 1000f;
+        return Math.Round(holdTimeS, 1);
     }
     public void SetHoldTimeMs(float timeMs)
     {
         holdTimeMs = timeMs;
     }
+
 
     // Start is called before the first frame update
     void Start()
