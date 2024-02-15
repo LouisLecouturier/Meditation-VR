@@ -1214,11 +1214,27 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1158065219989932373, guid: 31ce04286fa17ff4b8b6163a30068bdb, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1158065219989932373, guid: 31ce04286fa17ff4b8b6163a30068bdb, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1899073841150900347, guid: 31ce04286fa17ff4b8b6163a30068bdb, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1899073841150900347, guid: 31ce04286fa17ff4b8b6163a30068bdb, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4111956185233992938, guid: 31ce04286fa17ff4b8b6163a30068bdb, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4111956185233992938, guid: 31ce04286fa17ff4b8b6163a30068bdb, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
@@ -1228,6 +1244,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4539680850450380659, guid: 31ce04286fa17ff4b8b6163a30068bdb, type: 3}
       propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4539680850450380659, guid: 31ce04286fa17ff4b8b6163a30068bdb, type: 3}
+      propertyPath: m_AnchorMin.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6010270607569778791, guid: 31ce04286fa17ff4b8b6163a30068bdb, type: 3}
@@ -1244,6 +1264,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6989868154927961228, guid: 31ce04286fa17ff4b8b6163a30068bdb, type: 3}
       propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6989868154927961228, guid: 31ce04286fa17ff4b8b6163a30068bdb, type: 3}
+      propertyPath: m_AnchorMin.x
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -2697,7 +2721,7 @@ AudioListener:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1375656524}
-  m_Enabled: 1
+  m_Enabled: 0
 --- !u!20 &1375656526
 Camera:
   m_ObjectHideFlags: 0
