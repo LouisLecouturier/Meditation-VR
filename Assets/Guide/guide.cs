@@ -31,10 +31,16 @@ public class GuideScript : MonoBehaviour
 
 
 
+    public float GetInspirationTimeS() {
+        return Math.Round(inspirationTimeMs / 1000, 1)
+    }
 
     public void SetInspirationTimeMs(float timeMs)
     {
         inspirationTimeMs = timeMs;
+    }
+    public float GetExpirationTimeS() {
+        return Math.Round(expirationTimeMs / 1000, 1)
     }
 
     public void SetExpirationTimeMs(float timeMs)
@@ -42,6 +48,9 @@ public class GuideScript : MonoBehaviour
         expirationTimeMs = timeMs;
     }
 
+    public float GetHoldTimeS() {
+        return Math.Round(holdTimeMs / 1000, 1)
+    }
     public void SetHoldTimeMs(float timeMs)
     {
         holdTimeMs = timeMs;
