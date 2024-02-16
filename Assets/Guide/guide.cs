@@ -260,7 +260,6 @@ public class GuideScript : MonoBehaviour
         {
             case 0:
                 float inspirationProgression = EasedProgression(progression);
-                Debug.Log($"Inspiration Progression: {inspirationProgression}");
                 AnimateInspiration(inspirationProgression);
                 break;
             case 1:
