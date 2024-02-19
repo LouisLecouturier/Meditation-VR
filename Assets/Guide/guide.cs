@@ -57,7 +57,7 @@ public class GuideScript : MonoBehaviour {
   void Start() {
     for (int layer = 1; layer < (layerCount + 1); layer++) {
       GameObject layerObject = Instantiate(new GameObject($"Layer{layer}"), this.transform);
-
+      layerObject.transform.localPosition = Vector3.zero;
       GuideLayers.Add(layerObject);
 
 
@@ -84,8 +84,9 @@ public class GuideScript : MonoBehaviour {
         initialPositions[j] = petalPosition;
 
         Quaternion petalRotation = Quaternion.Euler(90 - angleDegree, 90, 0);
-        GameObject petalObject = Instantiate(petal, petalPosition, petalRotation, layerObject.transform);
-
+        GameObject petalObject = Instantiate(petal, layerObject.transform);
+        petalObject.transform.localPosition = petalPosition;
+        petalObject.transform.localRotation = petalRotation;
 
         float scale = layer / (float)layerCount * (MAX_SCALE - MIN_SCALE) + MIN_SCALE;
         initialScales[j] = petalObject.transform.localScale;
@@ -164,7 +165,7 @@ public class GuideScript : MonoBehaviour {
 
       RotateLayer(layer, 360, isEven, progression);
 
-      GuideLayers[layer - 1].transform.position =
+      GuideLayers[layer - 1].transform.localPosition =
         Vector3.Lerp(Vector3.zero, new Vector3(0, 0, -layer * layerGap), progression);
 
       for (int j = 0; j < layerPetalCount; j++) {
@@ -196,7 +197,7 @@ public class GuideScript : MonoBehaviour {
 
       RotateLayer(layer, 360, isEven, progression);
 
-      GuideLayers[layer - 1].transform.position =
+      GuideLayers[layer - 1].transform.localPosition =
         Vector3.Lerp(new Vector3(0, 0, -layer * layerGap), Vector3.zero, progression);
 
       for (int j = 0; j < layerPetalCount; j++) {
