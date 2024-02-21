@@ -63,17 +63,17 @@ public class ZenMode : MonoBehaviour
 
     private IEnumerator Waiting()
     {
-        // if (textObject.text != "Waiting")
-        // {
-        //     textObject.text = "Waiting";
-        // }
+        if (textObject.text != "Waiting")
+        {
+            textObject.text = "Waiting";
+        }
         yield return null;
     }
 
 
     void Start()
     {
-        // NeckJointStart();
+        NeckJointStart();
     }
 
     // Update is called once per frame
