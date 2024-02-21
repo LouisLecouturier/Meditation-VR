@@ -1,7 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
-using UnityEngine.UI;
+using TMPro;
+
 
 
 enum TimeType
@@ -18,32 +18,34 @@ public class TimeTextFeedback : MonoBehaviour
     [SerializeField] private TimeType timeType;
     private GuideScript guideScript;
 
+    public TextMeshProUGUI textTemps;
 
-    void Start()
+
+   void Start()
     {
-
-
+        guideScript = GameObject.Find("Guide").GetComponent<GuideScript>();
+        Debug.Log("NAME");
+        Debug.Log(guideScript.name);
     }
 
     // Update is called once per frame
     void Update()
     {
 
-        guideScript = GameObject.Find("Guide").GetComponent<GuideScript>();
-
         switch (timeType)
         {
             case TimeType.Inspiration:
-                GetComponent<Text>().text = guideScript.GetInspirationTimeS().ToString() + "s";
+                Debug.Log("Inspiration");
+                Debug.Log( guideScript.GetInspirationTimeS());
+                textTemps.text = guideScript.GetInspirationTimeS() + "s";
                 break;
             case TimeType.Expiration:
-                GetComponent<Text>().text = guideScript.GetExpirationTimeS().ToString() + "s";
+                textTemps.text = guideScript.GetExpirationTimeS() + "s";
                 break;
             case TimeType.Hold:
-                GetComponent<Text>().text = guideScript.GetHoldTimeS().ToString() + "s";
+                textTemps.text = guideScript.GetHoldTimeS() + "s";
                 break;
         }
-
 
     }
 }
