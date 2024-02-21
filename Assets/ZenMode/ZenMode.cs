@@ -85,8 +85,7 @@ public class ZenMode : MonoBehaviour
                 break;
             case NeckJointState.Waiting:
                 StartCoroutine(Waiting());
-                break;
-            
+                break; 
         }                 
     }
 }
