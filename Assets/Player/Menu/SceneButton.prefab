@@ -65,7 +65,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Scene name
+  m_text: 'Forest
+
+'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5c50df76b8de17349addd01e6c083d63, type: 2}
   m_sharedMaterial: {fileID: -4230376533470452952, guid: 5c50df76b8de17349addd01e6c083d63, type: 2}
@@ -202,7 +204,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: c83f7c9c78e2f4226b6afa887f631894, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 0a11747e4b932e94aa400cc109978cf6, type: 3}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -265,7 +267,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6857515412938858998}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 25a4df9668a2d44579694d99a310e972, type: 3}
+  m_Script: {fileID: 11500000, guid: 6b65ddbb8afebb54b933cfea84830235, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   scene: 0
