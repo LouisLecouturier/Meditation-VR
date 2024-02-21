@@ -32,20 +32,20 @@ public class TimeTextFeedback : MonoBehaviour
     void Update()
     {
 
-        // switch (timeType)
-        // {
-        //     case TimeType.Inspiration:
-        //         Debug.Log("Inspiration");
-        //         Debug.Log( guideScript.GetInspirationTimeS());
-        //         textTemps.text = guideScript.GetInspirationTimeS() + "s";
-        //         break;
-        //     case TimeType.Expiration:
-        //         textTemps.text = guideScript.GetExpirationTimeS() + "s";
-        //         break;
-        //     case TimeType.Hold:
-        //         textTemps.text = guideScript.GetHoldTimeS() + "s";
-        //         break;
-        // }
+        switch (timeType)
+        {
+            case TimeType.Inspiration:
+                Debug.Log("Inspiration");
+                Debug.Log( guideScript.GetInspirationTimeS());
+                textTemps.text = guideScript.GetInspirationTimeS() + "s";
+                break;
+            case TimeType.Expiration:
+                textTemps.text = guideScript.GetExpirationTimeS() + "s";
+                break;
+            case TimeType.Hold:
+                textTemps.text = guideScript.GetHoldTimeS() + "s";
+                break;
+        }
 
     }
 }
