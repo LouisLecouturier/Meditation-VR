@@ -49,8 +49,7 @@ ExportedObj/
 *.log
 *.pdb
 *.mdb
-*.meta
-*.opendb
+*.opedb
 *.VC.db
 
 
