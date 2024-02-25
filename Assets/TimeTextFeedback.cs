@@ -24,8 +24,8 @@ public class TimeTextFeedback : MonoBehaviour
    void Start()
     {
         guideScript = GameObject.Find("Guide").GetComponent<GuideScript>();
-        Debug.Log("NAME");
-        Debug.Log(guideScript.name);
+        // Debug.Log("NAME");
+        // Debug.Log(guideScript.name);
     }
 
     // Update is called once per frame
@@ -35,8 +35,8 @@ public class TimeTextFeedback : MonoBehaviour
         switch (timeType)
         {
             case TimeType.Inspiration:
-                Debug.Log("Inspiration");
-                Debug.Log( guideScript.GetInspirationTimeS());
+                // Debug.Log("Inspiration");
+                // Debug.Log( guideScript.GetInspirationTimeS());
                 textTemps.text = guideScript.GetInspirationTimeS() + "s";
                 break;
             case TimeType.Expiration:
