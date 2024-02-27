@@ -368,6 +368,8 @@ GameObject:
   - component: {fileID: 21330246763299811}
   - component: {fileID: 6861060375422799200}
   - component: {fileID: 3198234046189877981}
+  - component: {fileID: 6323083922744737867}
+  - component: {fileID: 1579194937712264153}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -572,6 +574,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3039055377456a14ea067643bc5998c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &6323083922744737867
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1953361345333176842}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f3aa31f769dd4d26898dbab8fd0f7ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textObject: {fileID: 5445225245197205306}
+  leftHand: {fileID: 3879415181415139630}
+  rightHand: {fileID: 5796041191100086089}
+  leftController: {fileID: 7165295852131086020}
+  rightController: {fileID: 2509636344332472830}
+--- !u!114 &1579194937712264153
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1953361345333176842}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2df63a59269a44b1aabefbe8526e5804, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textObject: {fileID: 5445225245197205306}
 --- !u!1 &2105324136974361519
 GameObject:
   m_ObjectHideFlags: 0
@@ -2291,7 +2323,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: New Text
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
