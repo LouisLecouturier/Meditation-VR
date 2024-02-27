@@ -2679,6 +2679,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Hand Menu 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1560599532337145937, guid: 7a1819e6c05c08e45b653fc22ee81b10, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1560599532337145937, guid: 7a1819e6c05c08e45b653fc22ee81b10, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1560599532337145937, guid: 7a1819e6c05c08e45b653fc22ee81b10, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1762384887287128353, guid: 7a1819e6c05c08e45b653fc22ee81b10, type: 3}
       propertyPath: cam
       value: 
