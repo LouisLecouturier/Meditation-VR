@@ -49,7 +49,10 @@ MonoBehaviour:
   initialPetalCount: 6
   layerCount: 4
   layerGap: 0.2
-  freq: 0.8
+  spreadFactor: 20
+  inspirationTimeMs: 4000
+  expirationTimeMs: 4000
+  holdTimeMs: 2000
 --- !u!95 &-4263295591359923930
 Animator:
   serializedVersion: 5
