@@ -6,7 +6,9 @@ public enum MeditationScenes
 {
     Sakura,
     Forest,
-    Desert
+    Desert,
+
+    Space
 }
 
 public class SceneButton : MonoBehaviour
