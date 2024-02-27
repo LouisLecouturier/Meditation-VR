@@ -9,9 +9,8 @@ using UnityEngine.XR;
 
 public class ZenMode : MonoBehaviour
 {
-   public TextMeshProUGUI textObject;
-
-   public Transform leftHand;
+    public TextMeshProUGUI textObject;
+    public Transform leftHand;
     public Transform rightHand;
     public XRBaseController leftController;
     public XRBaseController rightController;
@@ -19,28 +18,19 @@ public class ZenMode : MonoBehaviour
 
 
       // Enumération pour définir les différents états
-    public enum NeckJointState
+    public enum ZenModeState
     {
         Waiting,
         ZenMode,
+        Congrats,
     }
 
     // Variable pour stocker l'état actuel
-    private NeckJointState currentState = NeckJointState.Waiting;
-
-    void NeckJointStart() {
-        currentState = NeckJointState.ZenMode;
-        Debug.Log("Turning Left");
-
-    }
+    private ZenModeState currentState = ZenModeState.Waiting;
 
 
-    float GetAngle()
-    {
-        float angle = transform.eulerAngles.z;
-        if (angle > 180) angle -= 360; 
-        angle = Mathf.Abs(angle);
-       return angle;
+    public void ZenModeStart() {
+        currentState = ZenModeState.ZenMode;
     }
 
     private IEnumerator ZenModeCoroutine()
@@ -48,42 +38,52 @@ public class ZenMode : MonoBehaviour
         if (leftHand.position.y > transform.position.y && rightHand.position.y > transform.position.y && leftController.activateInteractionState.value > 0 && rightController.activateInteractionState.value > 0){
             yield return new WaitForSeconds(2);
 
-            currentState = NeckJointState.Waiting;
+            currentState = ZenModeState.Congrats;
         }
         else {
-            if (textObject.text != "ZenMode")
+            if (textObject.text != "Lotus position")
             {
-                textObject.text = "ZenMode";
+                textObject.text = "Lotus position";
             }
         }
         yield return null;
+    }
+
+
+    private IEnumerator Congrats()
+    {
+        if (textObject.text != "Well done!")
+        {
+            textObject.text = "Well done!";
+        }
+        yield return new WaitForSeconds(4);
+        textObject.text = "";
+        currentState = ZenModeState.Waiting;    
     }
 
    
 
     private IEnumerator Waiting()
     {
-        if (textObject.text != "Waiting")
-        {
-            textObject.text = "Waiting";
-        }
         yield return null;
     }
 
+    // void Start()
+    // {
+    //     ZenModeStart();
+    // }
 
-    void Start()
-    {
-        NeckJointStart();
-    }
 
-    // Update is called once per frame
     void Update()
     {
         switch (currentState) {
-            case NeckJointState.ZenMode:
+            case ZenModeState.ZenMode:
                 StartCoroutine(ZenModeCoroutine());
                 break;
-            case NeckJointState.Waiting:
+            case ZenModeState.Congrats:
+                StartCoroutine(Congrats());
+                break;
+            case ZenModeState.Waiting:
                 StartCoroutine(Waiting());
                 break; 
         }                 

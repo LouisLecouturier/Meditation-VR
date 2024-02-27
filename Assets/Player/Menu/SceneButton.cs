@@ -1,8 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-
 
 public enum MeditationScenes
 {
@@ -10,16 +8,20 @@ public enum MeditationScenes
     Forest,
     Desert
 }
+
 public class SceneButton : MonoBehaviour
 {
-    // Start is called before the first frame update
-
     [SerializeField] public MeditationScenes scene;
+    public Button button;
 
-
-    void TaskOnClick()
+    void Start()
     {
-        SceneManager.LoadScene(scene.ToString(), LoadSceneMode.Single);
+        button.onClick.AddListener(TaskOnClick);
     }
 
+    public void TaskOnClick()
+    {
+        SceneManager.LoadScene("Scenes/" + scene.ToString(), LoadSceneMode.Single);
+        Debug.Log("You have clicked the button " + scene.ToString() + " !");
+    }
 }

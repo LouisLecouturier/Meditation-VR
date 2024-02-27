@@ -16,12 +16,13 @@ public class NeckJoint : MonoBehaviour
         Waiting,
         TurningLeft,
         TurningRight,
+        Congrats,
     }
 
     // Variable pour stocker l'état actuel
     private NeckJointState currentState = NeckJointState.Waiting;
 
-    void NeckJointStart() {
+    public void NeckJointStart() {
         currentState = NeckJointState.TurningLeft;
         Debug.Log("Turning Left");
 
@@ -32,7 +33,8 @@ public class NeckJoint : MonoBehaviour
     {
         float angle = transform.eulerAngles.z;
         if (angle > 180) angle -= 360; 
-        angle = Mathf.Abs(angle);
+        // angle = Mathf.Abs(angle);
+        // Debug.Log(angle);
        return angle;
     }
 
@@ -45,9 +47,9 @@ public class NeckJoint : MonoBehaviour
             currentState = NeckJointState.TurningRight;
         }
         else {
-            if (textObject.text != "Turning Left")
+            if (textObject.text != "Tilt left")
         {
-            textObject.text = "Turning Left";
+            textObject.text = "Tilt left";
         }
 
         }
@@ -61,34 +63,39 @@ public class NeckJoint : MonoBehaviour
         {
             yield return new WaitForSeconds(2);
 
-            currentState = NeckJointState.Waiting;
+            currentState = NeckJointState.Congrats;
         }
         else {
-            if (textObject.text != "Turning Right")
+            if (textObject.text != "Tilt right")
         {
-            textObject.text = "Turning Right";
+            textObject.text = "Tilt right";
         }
 
         }
         yield return null;
+    }
+
+    private IEnumerator Congrats()
+    {
+        if (textObject.text != "Well done!")
+        {
+            textObject.text = "Well done!";
+        }
+        yield return new WaitForSeconds(4);
+        textObject.text = "";
+        currentState = NeckJointState.Waiting;    
     }
 
     private IEnumerator Waiting()
     {
-        if (textObject.text != "Waiting")
-        {
-            textObject.text = "Waiting";
-        }
         yield return null;
     }
 
+    // void Start()
+    // {
+    //     NeckJointStart();
+    // }
 
-    void Start()
-    {
-        NeckJointStart();
-    }
-
-    // Update is called once per frame
     void Update()
     {
         switch (currentState) {
@@ -98,14 +105,13 @@ public class NeckJoint : MonoBehaviour
             case NeckJointState.TurningRight:
                 StartCoroutine(TurnRight());
                 break;
-        
+            case NeckJointState.Congrats:
+                StartCoroutine(Congrats());
+                break;
             case NeckJointState.Waiting:
                 StartCoroutine(Waiting());
                 break;
             
         }
-        
-        
-        
     }
 }
