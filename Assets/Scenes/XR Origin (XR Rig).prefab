@@ -344,7 +344,7 @@ MonoBehaviour:
   m_ValueUpdated:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 377686173802944397}
+      - m_Target: {fileID: 5731978647902775002}
         m_TargetAssemblyTypeName: UnityEngine.CanvasGroup, UnityEngine
         m_MethodName: set_alpha
         m_Mode: 0
@@ -2675,6 +2675,46 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3879415181415139630}
     m_Modifications:
+    - target: {fileID: 135492535455950979, guid: 7a1819e6c05c08e45b653fc22ee81b10, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.0092
+      objectReference: {fileID: 0}
+    - target: {fileID: 135492535455950979, guid: 7a1819e6c05c08e45b653fc22ee81b10, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.0496
+      objectReference: {fileID: 0}
+    - target: {fileID: 135492535455950979, guid: 7a1819e6c05c08e45b653fc22ee81b10, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.002
+      objectReference: {fileID: 0}
+    - target: {fileID: 135492535455950979, guid: 7a1819e6c05c08e45b653fc22ee81b10, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 135492535455950979, guid: 7a1819e6c05c08e45b653fc22ee81b10, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 135492535455950979, guid: 7a1819e6c05c08e45b653fc22ee81b10, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.9997951
+      objectReference: {fileID: 0}
+    - target: {fileID: 135492535455950979, guid: 7a1819e6c05c08e45b653fc22ee81b10, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.020244468
+      objectReference: {fileID: 0}
+    - target: {fileID: 135492535455950979, guid: 7a1819e6c05c08e45b653fc22ee81b10, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 2.32
+      objectReference: {fileID: 0}
+    - target: {fileID: 135492535455950979, guid: 7a1819e6c05c08e45b653fc22ee81b10, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: 135492535455950979, guid: 7a1819e6c05c08e45b653fc22ee81b10, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1127816127266736048, guid: 7a1819e6c05c08e45b653fc22ee81b10, type: 3}
       propertyPath: m_Name
       value: Hand Menu 1
@@ -2768,6 +2808,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7a1819e6c05c08e45b653fc22ee81b10, type: 3}
+--- !u!225 &5731978647902775002 stripped
+CanvasGroup:
+  m_CorrespondingSourceObject: {fileID: 750544258520759751, guid: 7a1819e6c05c08e45b653fc22ee81b10, type: 3}
+  m_PrefabInstance: {fileID: 5036832190114618141}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &7612852591467370784 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3188589390525612605, guid: 7a1819e6c05c08e45b653fc22ee81b10, type: 3}
