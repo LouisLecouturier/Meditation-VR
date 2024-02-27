@@ -29,7 +29,7 @@ public class ZenMode : MonoBehaviour
     private ZenModeState currentState = ZenModeState.Waiting;
 
 
-    void ZenModeStart() {
+    public void ZenModeStart() {
         currentState = ZenModeState.ZenMode;
     }
 
@@ -57,6 +57,7 @@ public class ZenMode : MonoBehaviour
             textObject.text = "Well done!";
         }
         yield return new WaitForSeconds(4);
+        textObject.text = "";
         currentState = ZenModeState.Waiting;    
     }
 
@@ -67,10 +68,10 @@ public class ZenMode : MonoBehaviour
         yield return null;
     }
 
-    void Start()
-    {
-        ZenModeStart();
-    }
+    // void Start()
+    // {
+    //     ZenModeStart();
+    // }
 
 
     void Update()

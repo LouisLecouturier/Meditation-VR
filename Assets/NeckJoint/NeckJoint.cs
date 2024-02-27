@@ -22,7 +22,7 @@ public class NeckJoint : MonoBehaviour
     // Variable pour stocker l'état actuel
     private NeckJointState currentState = NeckJointState.Waiting;
 
-    void NeckJointStart() {
+    public void NeckJointStart() {
         currentState = NeckJointState.TurningLeft;
         Debug.Log("Turning Left");
 
@@ -33,7 +33,8 @@ public class NeckJoint : MonoBehaviour
     {
         float angle = transform.eulerAngles.z;
         if (angle > 180) angle -= 360; 
-        angle = Mathf.Abs(angle);
+        // angle = Mathf.Abs(angle);
+        // Debug.Log(angle);
        return angle;
     }
 
@@ -81,6 +82,7 @@ public class NeckJoint : MonoBehaviour
             textObject.text = "Well done!";
         }
         yield return new WaitForSeconds(4);
+        textObject.text = "";
         currentState = NeckJointState.Waiting;    
     }
 
@@ -88,6 +90,11 @@ public class NeckJoint : MonoBehaviour
     {
         yield return null;
     }
+
+    // void Start()
+    // {
+    //     NeckJointStart();
+    // }
 
     void Update()
     {

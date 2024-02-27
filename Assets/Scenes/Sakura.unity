@@ -592,6 +592,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4579852826949438, guid: c97f27fdde7cef642a0c3589090bfe06, type: 3}
   m_PrefabInstance: {fileID: 227339365}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &250596234 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6742824908021889596, guid: 31ce04286fa17ff4b8b6163a30068bdb, type: 3}
+  m_PrefabInstance: {fileID: 739610635}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c872eb6f4f6e2242b830e7a7533d17f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &258043059
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -666,6 +677,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Papillon (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 7898359039678936362, guid: bc1f98e88764746ca90e588eed7b80be, type: 3}
+      propertyPath: cam
+      value: 
+      objectReference: {fileID: 2098254381}
     - target: {fileID: 8505006454193058132, guid: bc1f98e88764746ca90e588eed7b80be, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1490,6 +1505,34 @@ PrefabInstance:
     - target: {fileID: 2404474215180630049, guid: 31ce04286fa17ff4b8b6163a30068bdb, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8690532676027700855, guid: 31ce04286fa17ff4b8b6163a30068bdb, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8690532676027700855, guid: 31ce04286fa17ff4b8b6163a30068bdb, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8690532676027700855, guid: 31ce04286fa17ff4b8b6163a30068bdb, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 250596234}
+    - target: {fileID: 8690532676027700855, guid: 31ce04286fa17ff4b8b6163a30068bdb, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8690532676027700855, guid: 31ce04286fa17ff4b8b6163a30068bdb, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnClick
+      objectReference: {fileID: 0}
+    - target: {fileID: 8690532676027700855, guid: 31ce04286fa17ff4b8b6163a30068bdb, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: buttonZen, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 8690532676027700855, guid: 31ce04286fa17ff4b8b6163a30068bdb, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 8741472445416931399, guid: 31ce04286fa17ff4b8b6163a30068bdb, type: 3}
       propertyPath: m_AnchorMax.x
@@ -4649,6 +4692,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Papillon
       objectReference: {fileID: 0}
+    - target: {fileID: 7898359039678936362, guid: bc1f98e88764746ca90e588eed7b80be, type: 3}
+      propertyPath: cam
+      value: 
+      objectReference: {fileID: 2098254381}
     - target: {fileID: 8505006454193058132, guid: bc1f98e88764746ca90e588eed7b80be, type: 3}
       propertyPath: m_LocalPosition.x
       value: -4.0868587
@@ -4698,6 +4745,11 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 8505006454193058132, guid: bc1f98e88764746ca90e588eed7b80be, type: 3}
   m_PrefabInstance: {fileID: 2074980599}
+  m_PrefabAsset: {fileID: 0}
+--- !u!20 &2098254381 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 6297063996854901451, guid: 31ce04286fa17ff4b8b6163a30068bdb, type: 3}
+  m_PrefabInstance: {fileID: 739610635}
   m_PrefabAsset: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

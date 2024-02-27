@@ -13,7 +13,7 @@ public class MouvementCasqueVR : MonoBehaviour
 
             // Utiliser les données de mouvement comme nécessaire
             // Par exemple, afficher la position et la rotation
-            Debug.Log("Position : " + position + ", Rotation : " + rotation.eulerAngles);
+            // Debug.Log("Position : " + position + ", Rotation : " + rotation.eulerAngles);
         }
     }
 }
