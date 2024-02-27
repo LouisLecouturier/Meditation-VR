@@ -48,7 +48,7 @@ MonoBehaviour:
   petal: {fileID: 4435269022215154990, guid: 7b0508ea06c914336b28b37d1e8112fe, type: 3}
   initialPetalCount: 6
   layerCount: 4
-  layerGap: 0.2
+  layerGap: 2
   spreadFactor: 20
   inspirationTimeMs: 4000
   expirationTimeMs: 4000

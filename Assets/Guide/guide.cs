@@ -6,7 +6,7 @@ public class GuideScript : MonoBehaviour {
   [SerializeField] private GameObject petal;
   [SerializeField] private int initialPetalCount = 6;
   [SerializeField] private int layerCount = 4;
-  [SerializeField] private float layerGap;
+  [SerializeField] private float layerGap = 1;
   [SerializeField] private float spreadFactor = 0.5f;
 
 
@@ -64,7 +64,7 @@ public class GuideScript : MonoBehaviour {
       int layerPetalCount = layer * initialPetalCount;
       float angleGap = 2 * Mathf.PI / layerPetalCount;
       // float radius = layerGap * layer;
-      float radius = 0.05f;
+      const float radius = 0.05f;
 
       List<GameObject> layerPetals = new();
       Vector3[] initialPositions = new Vector3[layerPetalCount];
@@ -89,8 +89,10 @@ public class GuideScript : MonoBehaviour {
         petalObject.transform.localRotation = petalRotation;
 
         float scale = layer / (float)layerCount * (MAX_SCALE - MIN_SCALE) + MIN_SCALE;
-        initialScales[j] = petalObject.transform.localScale;
-        petalObject.transform.localScale *= scale;
+        var localScale = petalObject.transform.localScale;
+        initialScales[j] = localScale;
+        localScale *= scale;
+        petalObject.transform.localScale = localScale;
 
 
         layerPetals.Add(petalObject);
@@ -166,24 +168,23 @@ public class GuideScript : MonoBehaviour {
       RotateLayer(layer, 360, isEven, progression);
 
       GuideLayers[layer - 1].transform.localPosition =
-        Vector3.Lerp(Vector3.zero, new Vector3(0, 0, -layer * layerGap), progression);
+        Vector3.Lerp(Vector3.zero, new Vector3(0, 0, layer * layerGap), progression);
 
       for (int j = 0; j < layerPetalCount; j++) {
         Vector3 initialPosition = initialPositions[j];
         GameObject petal = layerPetals[j];
 
+        Vector3 targetPosition = layer * spreadFactor * initialPosition;
+        targetPosition.z *= 2;
+
         petal.transform.localPosition =
-          Vector3.Lerp(initialPosition, layer * spreadFactor * initialPosition, progression);
+          Vector3.Lerp(initialPosition, targetPosition, progression);
       }
     }
   }
 
 
-  void AnimateHold(float progression) {
-    for (int layer = 1; layer < (layerCount + 1); layer++) {
-      //
-    }
-  }
+  void AnimateHold(float progression) { }
 
 
   void AnimateExpiration(float progression) {
@@ -198,14 +199,18 @@ public class GuideScript : MonoBehaviour {
       RotateLayer(layer, 360, isEven, progression);
 
       GuideLayers[layer - 1].transform.localPosition =
-        Vector3.Lerp(new Vector3(0, 0, -layer * layerGap), Vector3.zero, progression);
+        Vector3.Lerp(new Vector3(0, 0, layer * layerGap), Vector3.zero, progression);
 
       for (int j = 0; j < layerPetalCount; j++) {
         Vector3 initialPosition = initialPositions[j];
         GameObject petal = layerPetals[j];
 
+
+        Vector3 targetPosition = layer * spreadFactor * initialPosition;
+        targetPosition.z *= 2;
+
         petal.transform.localPosition =
-          Vector3.Lerp(layer * spreadFactor * initialPosition, initialPosition, progression);
+          Vector3.Lerp(targetPosition, initialPosition, progression);
       }
     }
   }
