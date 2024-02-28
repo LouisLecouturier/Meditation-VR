@@ -57,7 +57,7 @@ public class TargetManagement : MonoBehaviour
         {
         Color originalColor = renderer.material.color;
         Color newColor = new Color(originalColor.r, originalColor.g, originalColor.b, Mathf.Lerp(1, 0, t));
-        Debug.Log(newColor.a);
+        // Debug.Log(newColor.a);
 
         renderer.material.color = newColor;
         }
